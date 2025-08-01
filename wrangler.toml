@@ -1,12 +1,18 @@
 name = "foodshare"
 compatibility_date = "2023-12-01"
 
-# Pages 项目配置 - 用于静态网站部署
-pages_build_output_dir = "dist"
+# Workers 项目配置
+main = "dist/worker.js"
 
 # 构建配置
 [build]
 command = "npm run build"
+
+# 静态资产配置 (Workers Sites)
+[site]
+bucket = "dist"
+include = ["**/*"]
+exclude = ["worker.js"]
 
 # KV 命名空间绑定 - 用于应用数据存储
 [[kv_namespaces]]
