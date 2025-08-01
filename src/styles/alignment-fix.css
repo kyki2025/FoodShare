@@ -1,0 +1,12 @@
+/* 简化的对齐样式 - 只保留必要的修复 */
+
+/* 确保所有图标和文字在flex容器中完美对齐 */
+.flex.items-center {
+  align-items: center !important;
+}
+
+/* 移除可能影响对齐的默认样式 */
+svg.lucide {
+  display: inline-block;
+  vertical-align: middle;
+}
