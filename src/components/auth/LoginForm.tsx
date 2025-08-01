@@ -82,7 +82,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl font-bold text-emerald-700">茶记</CardTitle>
+          <CardTitle className="text-2xl font-bold text-orange-700">美食分享</CardTitle>
           <Button
             variant="ghost"
             size="sm"
@@ -98,27 +98,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
             <Bug className="w-4 h-4" />
           </Button>
         </div>
-        <CardDescription>登录您的茶叶记录账户</CardDescription>
+        <CardDescription>登录您的美食记录账户</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4">
+        <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4">
           <div className="flex items-start space-x-2">
             <div className="flex-shrink-0 mt-0.5">
-              <Cloud className="w-4 h-4 text-emerald-600" />
+              <Cloud className="w-4 h-4 text-orange-600" />
             </div>
             <div className="flex-1">
-              <p className="text-sm text-emerald-700 font-medium mb-1">
+              <p className="text-sm text-orange-700 font-medium mb-1">
                 跨设备数据同步
               </p>
-              <p className="text-xs text-emerald-600 mb-2">
-                如果您在其他设备上有茶记录数据，请点击同步按钮导入数据。
+              <p className="text-xs text-orange-600 mb-2">
+                如果您在其他设备上有美食记录数据，请点击同步按钮导入数据。
               </p>
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={() => setShowDataSync(true)}
-                className="bg-white hover:bg-emerald-50 text-emerald-700 border-emerald-200"
+                className="bg-white hover:bg-orange-50 text-orange-700 border-orange-200"
               >
                 <RefreshCw className="w-3 h-3 mr-1" />
                 同步数据
@@ -256,7 +256,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
 
           <Button 
             type="submit" 
-            className="w-full bg-emerald-600 hover:bg-emerald-700"
+            className="w-full bg-orange-600 hover:bg-orange-700"
             disabled={loading}
           >
             {loading ? (
@@ -277,7 +277,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
               type="button"
               variant="link"
               onClick={onSwitchToRegister}
-              className="text-emerald-600 hover:text-emerald-700"
+              className="text-orange-600 hover:text-orange-700"
             >
               还没有账户？立即注册
             </Button>

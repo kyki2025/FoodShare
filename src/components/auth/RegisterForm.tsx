@@ -63,8 +63,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-emerald-700">茶记</CardTitle>
-        <CardDescription>创建您的茶叶记录账户</CardDescription>
+        <CardTitle className="text-2xl font-bold text-orange-700">美食分享</CardTitle>
+        <CardDescription>创建您的美食记录账户</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -168,7 +168,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
 
           <Button 
             type="submit" 
-            className="w-full bg-emerald-600 hover:bg-emerald-700"
+            className="w-full bg-orange-600 hover:bg-orange-700"
             disabled={loading}
           >
             {loading ? (
@@ -189,7 +189,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
               type="button"
               variant="link"
               onClick={onSwitchToLogin}
-              className="text-emerald-600 hover:text-emerald-700"
+              className="text-orange-600 hover:text-orange-700"
             >
               已有账户？立即登录
             </Button>

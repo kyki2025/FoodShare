@@ -48,16 +48,16 @@ const htmlTemplate = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>茶记 - 品茶记录应用</title>
-    <meta name="description" content="记录您的品茶体验，管理茶叶收藏">
-    <meta name="theme-color" content="#10b981">
+    <title>美食分享 - 美食记录应用</title>
+    <meta name="description" content="记录您的美食体验，分享美食时光">
+    <meta name="theme-color" content="#ea580c">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="https://pub-cdn.sider.ai/u/U01AHE70X2G/web-coder/6884695094baea4807e5eee6/resource/ecf96b3c-aa5d-49bc-969f-95d4949947a0.jpg" type="image/png">
     
     <!-- PWA相关 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="茶记">
+    <meta name="apple-mobile-web-app-title" content="美食分享">
     <link rel="apple-touch-icon" href="https://pub-cdn.sider.ai/u/U01AHE70X2G/web-coder/6884695094baea4807e5eee6/resource/ecf96b3c-aa5d-49bc-969f-95d4949947a0.jpg">
     
     <!-- 移动端优化 -->
@@ -238,7 +238,59 @@ if (isProd) {
 } else {
   const ctx = await esbuild.context(webAppOpts)
   await ctx.watch()
-  const { hosts, port } = await ctx.serve()
+  
+  // 更新HTML文件以引用生成的资源
+  const updateHtml = () => {
+    const htmlPath = path.join('dist', 'index.html')
+    let htmlContent = fs.readFileSync(htmlPath, 'utf8')
+    
+    // 查找生成的文件
+    const distFiles = fs.readdirSync('dist')
+    const jsFile = distFiles.find(f => f.startsWith('main.') && f.endsWith('.js'))
+    const cssFile = distFiles.find(f => f.startsWith('main.') && f.endsWith('.css'))
+    
+    // 如果HTML中还没有引用，则添加
+    if (cssFile && !htmlContent.includes(cssFile)) {
+      htmlContent = htmlContent.replace(
+        '</head>',
+        `    <link rel="stylesheet" href="/${cssFile}">\n</head>`
+      )
+    }
+    
+    if (jsFile && !htmlContent.includes(jsFile)) {
+      htmlContent = htmlContent.replace(
+        '</body>',
+        `    <script src="/${jsFile}"></script>\n</body>`
+      )
+    }
+    
+    fs.writeFileSync(htmlPath, htmlContent)
+  }
+  
+  // 等待文件生成后更新HTML
+  const waitForFiles = () => {
+    return new Promise((resolve) => {
+      const checkFiles = () => {
+        const distFiles = fs.readdirSync('dist')
+        const jsFile = distFiles.find(f => f.startsWith('main.') && f.endsWith('.js'))
+        const cssFile = distFiles.find(f => f.startsWith('main.') && f.endsWith('.css'))
+        
+        if (jsFile && cssFile) {
+          updateHtml()
+          resolve()
+        } else {
+          setTimeout(checkFiles, 100)
+        }
+      }
+      checkFiles()
+    })
+  }
+  
+  await waitForFiles()
+  
+  const { hosts, port } = await ctx.serve({
+    servedir: 'dist'
+  })
   console.log(`Running on:`)
   hosts.forEach((host) => {
     console.log(`http://${host}:${port}`)
