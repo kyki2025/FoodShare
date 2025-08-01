@@ -1,9 +1,9 @@
 {
-  "name": "web-creator",
+  "name": "foodshare",
   "version": "1.0.0",
   "scripts": {
     "dev": "node scripts/build.mjs",
-    "build": "node scripts/build.mjs --production && cp -r dist/* .",
+    "build": "node scripts/build.mjs --production",
     "deploy": "echo 'Deployment handled by Cloudflare Pages'"
   },
   "dependencies": {
